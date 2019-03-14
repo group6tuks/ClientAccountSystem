@@ -17,7 +17,7 @@ public class Database
 			
 			stmt = con.createStatement();
 			String sql = "CREATE TABLE IF NOT EXISTS Account "+
-				"(accountID INT PRIMARY KEY NOT NULL, "+
+				"(accountID INT PRIMARY KEY AUTOINCREMENT, "+
 				"userID INT NOT NULL, "+
 				"accountType	CHAR(50), "+
 				"currentBalance	REAL)";
@@ -29,7 +29,7 @@ public class Database
 			stmt = con.createStatement();
 			
 			sql = "CREATE TABLE IF NOT EXISTS Log "+
-				"(logID INT PRIMARY KEY	NOT NULL, "+
+				"(logID INT PRIMARY KEY	AUTOINCREMENT, "+
 				"transactionType CHAR(50) NOT NULL, "+
 				"amount REAL, "+
 				"date TEXT, "+
