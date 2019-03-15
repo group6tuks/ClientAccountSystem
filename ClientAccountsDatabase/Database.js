@@ -18,7 +18,8 @@ class Database {
 						"(accountID INT PRIMARY KEY NOT NULL, "+
 						"userID INT NOT NULL, "+
 						"accountType	CHAR(50), "+
-						"currentBalance	REAL)");
+						"currentBalance	REAL, "+
+				      		"deactivate TEXT)");
 				
 				console.log("Create database table Account");
 				db.run("CREATE TABLE IF NOT EXISTS Log "+
@@ -27,6 +28,7 @@ class Database {
 						"amount REAL, "+
 						"date TEXT, "+
 						"time TEXT, "+
+				       		"deactivate TEXT, "+
 						"accountID INT NOT NULL)");
 						
 			}
