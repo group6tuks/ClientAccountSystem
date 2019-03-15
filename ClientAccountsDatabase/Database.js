@@ -1,5 +1,6 @@
-//"use strict";
+"use strict";
 const sqlite3 = require('sqlite3');
+const Promise = require('bluebird')
 
 class Database {
 	constructor()
@@ -9,18 +10,18 @@ class Database {
 			{
 				console.log("Error connecting to database!", err);
 			}
-			else
-			{
+
+			db.serialize(function(){
 				console.log('Connected to database!');
 				
 				console.log("Create database table Account");
-				db.run("CREATE TABLE IF NOT EXISTS Account "+
+				db.run("CREATE TABLE IF NOT EXISTS account "+
 						"(accountID INT PRIMARY KEY NOT NULL, "+
 						"userID INT NOT NULL, "+
 						"accountType	CHAR(50), "+
 						"currentBalance	REAL)");
 				
-				console.log("Create database table Account");
+				console.log("Create database table Log");
 				db.run("CREATE TABLE IF NOT EXISTS Log "+
 						"(logID INT PRIMARY KEY	NOT NULL, "+
 						"transactionType CHAR(50) NOT NULL, "+
@@ -28,11 +29,14 @@ class Database {
 						"date TEXT, "+
 						"time TEXT, "+
 						"accountID INT NOT NULL)");
-						
-			}
+
+			});
 			
-		})
+		});
+
+		
 	}
+
 }
 
 const database = new Database();
