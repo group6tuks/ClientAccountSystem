@@ -204,9 +204,9 @@ class SQLQueries{
         });
         let sql = `UPDATE Account
                 SET deactivated=?
-                WHERE accountID = ?`;
+                WHERE userID = ?`;
 
-        db.each(sql, [1,user], (err, row) => {
+        db.each(sql, [true,user], (err, row) => {
             if (err) {
                 throw err;
             }
