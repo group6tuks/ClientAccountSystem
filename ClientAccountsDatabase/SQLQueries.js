@@ -61,65 +61,75 @@ class SQLQueries{
                 FROM Log
                 WHERE accountID = ?`;
 
-        while(i<5){
+         if(i<5){
             db.each(sql, [account], (err, row) => {
                 if (err) {
                     throw err;
                 }
-                console.log(`${row.account} ${row.transactionType} - ${row.amount}`);
-                stringOut =`${row.account} ${row.transactionType} ${row.amount}`+', ';
+                console.log(`${row.account} ${row.transactionType} - R${row.amount}`);
+                stringOut =`${row.account} ${row.transactionType} R${row.amount}`+', ';
+                i++;
             });
-        }
+         }
         db.close();
         return stringOut;
     }
 
      logWithdrawalTransaction(account,amount){
-        const sqlite3 = require('sqlite3').verbose();
-        let stringOut;
-        let currentDate = new Date(),
-            day = currentDate.getDate(),
-            month = currentDate.getMonth() + 1,
-            year = currentDate.getFullYear();
-        let currDate= day + "/" + month + "/" + year;
-        let currentTime = new Date(),
-            hours = currentTime.getHours(),
-            minutes = currentTime.getMinutes();
+         let stringOut;
+         let insufficient='not enough funds';
+         let tbalance=this.selectBalance(account,function (amount){
+         })-amount;
+        if (tbalance<0)
+        {
+            return insufficient;
+        }
+        else {
+            const sqlite3 = require('sqlite3').verbose();
+            let currentDate = new Date(),
+                day = currentDate.getDate(),
+                month = currentDate.getMonth() + 1,
+                year = currentDate.getFullYear();
+            let currDate = day + "/" + month + "/" + year;
+            let currentTime = new Date(),
+                hours = currentTime.getHours(),
+                minutes = currentTime.getMinutes();
 
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-
-        let suffix = "AM";
-        if (hours >= 12) {
-            suffix = "PM";
-            hours = hours - 12;
-        }
-        if (hours === 0) {
-            hours = 12;
-        }
-        let currTime=hours + ":" + minutes + " " + suffix;
-        let db = new sqlite3.Database('./ClientAccountsDatabase.sqlite3', sqlite3.OPEN_READWRITE, (err) => {
-            if (err) {
-                return console.error(err.message);
+            if (minutes < 10) {
+                minutes = "0" + minutes;
             }
-        });
-        let sql = `INSERT INTO Log Values(?,?,?,?,?)`;
-            db.each(sql, ['withdrawal',amount,currDate,currTime,account], (err) => {
+
+            let suffix = "AM";
+            if (hours >= 12) {
+                suffix = "PM";
+                hours = hours - 12;
+            }
+            if (hours === 0) {
+                hours = 12;
+            }
+            let currTime = hours + ":" + minutes + " " + suffix;
+            let db = new sqlite3.Database('./ClientAccountsDatabase.sqlite3', sqlite3.OPEN_READWRITE, (err) => {
+                if (err) {
+                    return console.error(err.message);
+                }
+            });
+            let sql = `INSERT INTO Log Values(?,?,?,?,?,?)`;
+            db.each(sql, ['10','withdrawal', amount, currDate, currTime, account], (err) => {   //using dummy value of 10
                 if (err) {
                     throw err;
                 }
             });
-            let tbalance=selectBalance(account)-amount;
-        sql = `UPDATE Account SET balance=?`;
-        db.each(sql, [tbalance], (err, row) => {
-            if (err) {
-                throw err;
-            }
-            console.log(`${row.account} ${row.transactionType}-R${row.balance}`);
-            stringOut =`${row.account} ${row.transactionType}-R${row.amount}, `;
-            return stringOut;
-        });
+
+            sql = `UPDATE Account SET currentBalance=?`;
+            db.each(sql, [tbalance], (err, row) => {
+                if (err) {
+                    throw err;
+                }
+                console.log(`${row.account} ${row.transactionType}-R${row.balance}`);
+                stringOut = `${row.account} ${row.transactionType}-R${row.amount}, `;
+                return stringOut;
+            });
+        }
 
     }
 
@@ -153,14 +163,15 @@ class SQLQueries{
                 return console.error(err.message);
             }
         });
-        let sql = `INSERT INTO Log Values(?,?,?,?,?)`;
-        db.each(sql, ['withdrawal',amount,currDate,currTime,account], (err) => {
+        let sql = `INSERT INTO Log Values(?,?,?,?,?,?)`;
+        db.each(sql, ['10','withdrawal',amount,currDate,currTime,account], (err) => { //using dummy value of 10
             if (err) {
                 throw err;
             }
         });
-        let tbalance=selectBalance(account)+amount;
-        sql = `UPDATE Account SET balance=?`;
+         let tbalance=this.selectBalance(account,function (amount){
+         })+amount;
+        sql = `UPDATE Account SET currentBalance=?`;
         db.each(sql, [tbalance], (err, row) => {
             if (err) {
                 throw err;
@@ -171,10 +182,10 @@ class SQLQueries{
         });
 
     }
-     selectBalance(account) {
+
+    selectBalance(account,callback) {
         const sqlite3 = require('sqlite3').verbose();
-        let num=0;
-        let db = new sqlite3.Database('./ClientAccountsDatabase.sqlite3', sqlite3.OPEN_READWRITE, (err) => {
+                let db = new sqlite3.Database('./ClientAccountsDatabase.sqlite3', sqlite3.OPEN_READWRITE, (err) => {
             if (err) {
                 return console.error(err.message);
             }
@@ -187,14 +198,13 @@ class SQLQueries{
             if (err) {
                 throw err;
             }
-            console.log(`${row.account}-R${row.currentBalance}`);
-            num = `${row.currentBalance}`;
-        });
+            return callback(row.currentBalance);
+                });
         db.close();
-        return num;
     }
 
-     deactivateUser(user) {
+
+        deactivateUser(user) {
         const sqlite3 = require('sqlite3').verbose();
         let stringOut="";
         let db = new sqlite3.Database('./ClientAccountsDatabase.sqlite3', sqlite3.OPEN_READWRITE, (err) => {
@@ -203,10 +213,10 @@ class SQLQueries{
             }
         });
         let sql = `UPDATE Account
-                SET deactivated=?
-                WHERE userID = ?`;
+                SET deactivated=true
+                WHERE accountID = ?`;
 
-        db.each(sql, [true,user], (err, row) => {
+        db.each(sql, [user], (err, row) => {
             if (err) {
                 throw err;
             }
