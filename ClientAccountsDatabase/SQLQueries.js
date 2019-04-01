@@ -28,6 +28,47 @@ class SQLQueries{
        
     }
 
+    createAccount(user, amount, callback){
+         const sqlite3 = require('sqlite3').verbose();
+        let stringOut="";
+        let db = new sqlite3.Database('./ClientAccountsDatabase.sqlite3', sqlite3.OPEN_READWRITE, (err) => {
+            if (err) {
+                return callback(err.message);
+            }
+            else{
+                var accountTypes = ["Debit", "Cheque", "Savings"];
+                var accType =  accountTypes[Math.floor(Math.random()*accountTypes.length)];
+
+               let sql = `INSERT INTO  Account (userID, accountType, currentBalance) VALUES(?,?,?)`;
+                db.run(sql, [user, accType,amount], (err) => {
+                if (err) {
+                    callback(err);
+                }
+
+                let accID = db.get('SELECT accountID FROM Account WHERE userID=?', [user], (err)=>{
+                    if (err) {
+                        callback(err);
+                    }
+                });
+
+                sql = `INSERT INTO Log(transactionType,amount, accountID) Values(?,?,?)`;
+                db.run(sql, ['deposit',amount,accID], (err) => {
+                    if (err) {
+                        callback(err);
+                    }
+                    
+                }); 
+
+                return callback("Entry created");
+            });
+            
+        }
+
+         db.close();
+       
+    });
+}
+
     getAccounts(user, callback){
         const sqlite3 = require('sqlite3').verbose();
         let stringOut="";
@@ -121,17 +162,26 @@ class SQLQueries{
         
     }
 
-    printMini(account){
+    printMini(accID, callback){
         const sqlite3 = require('sqlite3').verbose();
         let stringOut="";
         let i=0;
         let db = new sqlite3.Database('./ClientAccountsDatabase.sqlite3', sqlite3.OPEN_READWRITE, (err) => {
             if (err) {
-                return console.error(err.message);
+                return callback(err.message);
             }
-                let sql = `SELECT *
+                let sql = `SELECT transactionType, amount, date, time
                     FROM Log
-                    WHERE accountID = ? LIMIT 5`;
+                    WHERE accountID = ?
+                    ORDER BY date, time DESC LIMIT 6`;
+
+                 db.all(sql,[accID], (err, row) => {
+                    if (err) {
+                        throw err;
+                    }
+                    stringOut += `${row.transactionType} + '  R' +${row.amount}, ' date: '+ ${row.date} ${row.time}\n `;
+                    return callback(row);
+                });
         });
         
         db.close();
