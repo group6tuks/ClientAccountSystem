@@ -119,7 +119,7 @@ class Reporting {
 		
                 //console.log(numLines);
                 
-		if(numLines >= 5)
+		if(numLines >= 50)
 		{
 			this.postToRepSubSystem(numLines);
 		}
