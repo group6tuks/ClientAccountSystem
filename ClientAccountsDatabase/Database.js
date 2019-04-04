@@ -10,32 +10,28 @@ class Database {
 			{
 				console.log("Error connecting to database!", err);
 			}
-			
+
 			db.serialize(function(){
-        	console.log('Created/Connected to database!');
 				
-				  console.log("Created database table Account if it doesnt exist!");
-				  db.run("CREATE TABLE IF NOT EXISTS account "+
-						  "(accountID INT PRIMARY KEY NOT NULL, "+
-						  "userID INT NOT NULL, "+
-						  "accountType	CHAR(50), "+
-						  "currentBalance	REAL, "+
-				      "deactivate TEXT)");
+				db.run("CREATE TABLE IF NOT EXISTS account "+
+						"(accountID INTEGER PRIMARY KEY AUTOINCREMENT, "+
+						"userID INT NOT NULL, "+
+						"accountType	CHAR(50), "+
+						"currentBalance	REAL DEFAULT 0, " +
+				      	"active TEXT DEFAULT 'active')");
+
 				
 
-				console.log("Created database table Log if it doesnt exist!");
 				db.run("CREATE TABLE IF NOT EXISTS Log "+
-						"(logID INT PRIMARY KEY	NOT NULL, "+
+						"(logID INTEGER PRIMARY KEY AUTOINCREMENT, "+
 						"transactionType CHAR(50) NOT NULL, "+
 						"amount REAL, "+
-						"date TEXT, "+
-						"time TEXT, "+
-				    "deactivate TEXT, "+
+						"date DEFAULT CURRENT_DATE, "+
+						"time DEFAULT CURRENT_TIME, "+
 						"accountID INT NOT NULL)");
-				
-				db.close();
-				console.log("Disconnected from database!");		
+
 			});
+			
 		});
 
 		
