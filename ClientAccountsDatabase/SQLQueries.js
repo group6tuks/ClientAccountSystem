@@ -1,5 +1,6 @@
 const sqlite3 = require('sqlite3');
 const app = require('express');
+const reporting = require('Reporting');
 
 class SQLQueries{
     createAccount(user, callback){
@@ -26,6 +27,13 @@ class SQLQueries{
 
          db.close();
        
+     //-----Reporting------
+        
+    var rep = new reporting.Reporting();
+    rep.log('1', user, -1, "-1", 0.0);
+
+    //-------------------
+        
     }
 
     createAccount(user, amount, callback){
@@ -67,6 +75,14 @@ class SQLQueries{
          db.close();
        
     });
+        
+    //-----Reporting------
+        
+    var rep = new reporting.Reporting();
+    rep.log('7', user, accID, accType, -1);
+
+    //-------------------
+        
 }
 
     getAccounts(user, callback){
@@ -89,6 +105,14 @@ class SQLQueries{
             
         });
         db.close();
+        
+        //-----Reporting------
+        
+        var rep = new reporting.Reporting();
+        rep.log('2', user, -1, "-1", -1);
+        
+        //-------------------
+        
     }
 
 
@@ -111,6 +135,7 @@ class SQLQueries{
         });
         
         db.close();
+       
     }
 
     getEntries(callback){
@@ -185,6 +210,14 @@ class SQLQueries{
         });
         
         db.close();
+        
+        //-----Reporting-----
+        
+        var rep = new reporting.Reporting();
+        rep.log('4', -1, accID, "-1", -1);
+        
+        //-------------------
+        
         return stringOut;
     }
 
@@ -222,6 +255,14 @@ class SQLQueries{
 
             db.close();
         });
+        
+        //-----Reporting-----
+        
+        var rep = new reporting.Reporting();
+        rep.log('5', -1, accID, "-1", amount);
+        
+        //-------------------
+        
 }
 
     deposit(accID,amount,callback){
@@ -256,6 +297,14 @@ class SQLQueries{
             });
 
         });
+        
+        //-----Reporting-----
+        
+        var rep = new reporting.Reporting();
+        rep.log('6', -1, accID, "-1", amount);
+        
+        //-------------------
+        
     }
 
     selectBalance(account,callback) {
@@ -279,6 +328,14 @@ class SQLQueries{
         });
         
         db.close();
+        
+        //-----Reporting-----
+        
+        var rep = new reporting.Reporting();
+        rep.log('3', -1, account, "-1", -1);
+        
+        //-------------------
+        
     }
 
     deactivateUser(user, callback) {
@@ -303,6 +360,13 @@ class SQLQueries{
         });
         
         db.close();
+        
+        //-----Reporting------
+        
+        var rep = new reporting.Reporting();
+        rep.log('8', user, -1, "-1", -1);
+        
+        //-------------------
     }
 
     activateUser(user, callback) {
@@ -327,6 +391,13 @@ class SQLQueries{
         });
        
         db.close();
+        
+        //-----Reporting------
+        
+        var rep = new reporting.Reporting();
+        rep.log('9', user, -1, "-1", -1);
+        
+        //--------------------
     }
 
 
