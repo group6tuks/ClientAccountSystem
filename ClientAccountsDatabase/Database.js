@@ -12,24 +12,22 @@ class Database {
 			}
 
 			db.serialize(function(){
-				console.log('Connected to database!');
 				
-				console.log("Create database table Account");
 				db.run("CREATE TABLE IF NOT EXISTS account "+
-						"(accountID INT PRIMARY KEY NOT NULL, "+
+						"(accountID INTEGER PRIMARY KEY AUTOINCREMENT, "+
 						"userID INT NOT NULL, "+
 						"accountType	CHAR(50), "+
-						"currentBalance	REAL, "+
-				      		"deactivate TEXT)");
+						"currentBalance	REAL DEFAULT 0, " +
+				      	"active TEXT DEFAULT 'active')");
+
 				
-				console.log("Create database table Log");
+
 				db.run("CREATE TABLE IF NOT EXISTS Log "+
-						"(logID INT PRIMARY KEY	NOT NULL, "+
+						"(logID INTEGER PRIMARY KEY AUTOINCREMENT, "+
 						"transactionType CHAR(50) NOT NULL, "+
 						"amount REAL, "+
-						"date TEXT, "+
-						"time TEXT, "+
-				       		"deactivate TEXT, "+
+						"date DEFAULT CURRENT_DATE, "+
+						"time DEFAULT CURRENT_TIME, "+
 						"accountID INT NOT NULL)");
 
 			});
@@ -40,5 +38,7 @@ class Database {
 	}
 
 }
+
+const database = new Database();
 
 module.exports = Database;
