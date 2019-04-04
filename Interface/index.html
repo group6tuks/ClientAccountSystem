@@ -14,8 +14,7 @@
     <style>
         body {
             padding: 10px;
-            background-color: white;
-            color: #10A8AB;
+            background-color: #FFFDFD;
             font-family: "Arial Black", Times, serif;
         }
 
@@ -68,6 +67,7 @@
             text-align: start;
             align-items: right;
             justify-content: right;
+
         }
 
         #line {
@@ -77,15 +77,30 @@
         }
 
         /*Headings*/
-        h1, h2, h3, h4 {
+        h1, h2, h4 {
             color: #10A8AB;
             font-family: "Arial Black", Times, serif;
         }
 
-        h1 {
-            font-family: "Comic Sans MS", Times, serif;
-            text-shadow: 2px 2px black;
+        h3 {
+            font-family: "Century Gothic", Times, serif;
+            text-shadow: 0.5px 0.5px black;
+            color: #10A8AB;
             /* Comic Sans MS Berlin Sans FB*/
+        }
+        .textout{
+            height: 200px;
+            width: 300px;
+            border: 1px solid #10A8AB;
+            border-color: #10A8AB;
+            border-radius: 5px;
+        }
+        .textouting{
+            height: 400px;
+            width: 550px;
+            border: 1px solid #10A8AB;
+            border-color: #10A8AB;
+            border-radius: 5px;
         }
 
         #next {
@@ -148,87 +163,19 @@
         .bb {
             background-color: #10A8AB;
             border-color: #10A8AB;
-            width: 100%;
         }
 
         .about-self {
             font-family: "Century Gothic", Times, serif;
             font-size: 17px;
         }
-
-        /*-------------------------------------------------------------------*/
-
-        /*
-
-        .form-style-9{
-            max-width: 450px;
-            background: #FAFAFA;
-            padding: 30px;
-            margin: 50px auto;
+        .centerButtons{
+            margin-left: 9%;
         }
-        .form-style-9 ul{
-            padding:0;
-            margin:0;
-            list-style:none;
+        .create, .search , .Withdrawal , .Deposit, .delete, .statement{
+            margin-left: 9%;
         }
-        .form-style-9 ul li{
-            display: block;
-            margin-bottom: 10px;
-            min-height: 35px;
-        }
-        .form-style-9 ul li  .field-style{
-            box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            padding: 8px;
-            outline: none;
-            border: 1px solid #B0CFE0;
-            -webkit-transition: all 0.30s ease-in-out;
-            -moz-transition: all 0.30s ease-in-out;
-            -ms-transition: all 0.30s ease-in-out;
-            -o-transition: all 0.30s ease-in-out;
-
-        }.form-style-9 ul li  .field-style:focus{
-            box-shadow: 0 0 5px #B0CFE0;
-            border:1px solid #B0CFE0;
-        }
-        .form-style-9 ul li .field-split{
-            width: 49%;
-        }
-        .form-style-9 ul li .field-full{
-            width: 100%;
-        }
-        .form-style-9 ul li input.align-left{
-            float:left;
-        }
-        .form-style-9 ul li input.align-right{
-            float:right;
-        }
-        .form-style-9 ul li textarea{
-            width: 100%;
-            height: 100px;
-        }
-        .form-style-9 ul li input[type="button"],
-        .form-style-9 ul li input[type="submit"] {
-            -moz-box-shadow: inset 0px 1px 0px 0px #3985B1;
-            -webkit-box-shadow: inset 0px 1px 0px 0px #3985B1;
-            box-shadow: inset 0px 1px 0px 0px #3985B1;
-            background-color: #216288;
-            border: 1px solid #17445E;
-            display: inline-block;
-            cursor: pointer;
-            color: #FFFFFF;
-            padding: 8px 18px;
-            text-decoration: none;
-            font: 12px Arial, Helvetica, sans-serif;
-        }
-        .form-style-9 ul li input[type="button"]:hover,
-        .form-style-9 ul li input[type="submit"]:hover {
-            background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
-            background-color: #28739E;
-        }
-
-        */
+        
     </style>
 </head>
 
@@ -238,89 +185,181 @@
             <img src="https://res.cloudinary.com/dpxsqdu6h/image/upload/v1550602530/fnb-logo.png" class="logo">
         </div>
         <hr id="line">
-        <h1 id="headerText">Client Accounts System</h1>
+        <h3 id="headerText">Client Accounts System</h3>
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md"><button type="button" class="btn btn-primary bb" id="create">New</button></div>
+            <div class="centerButtons">
+                <button type="button" class="btn btn-primary bb" id="create">New</button>
+                <button type="button" class="btn btn-primary bb" id="search">Search</button>
+                <button type="button" class="btn btn-primary bb" id="statement">Statement</button>                
+                <button type="button" class="btn btn-primary bb" id="dep">Deposit</button>
+                <button type="button" class="btn btn-primary bb" id="withdraw">Withdrawal</button>
+                <button type="button" class="btn btn-primary bb" id="delete">De/activate</button>
+            </div>
+         
+         <!--
+            <div class="col-md"> <button type="button" class="btn btn-primary bb" id="create">New</button></div>
             <div class="col-md"><button type="button" class="btn btn-primary bb" id="search">Search</button></div>
             <div class="col-md"><button type="button" class="btn btn-primary bb" id="dep">Deposit</button></div>
-            <div class="col-md"><button type="button" class="btn btn-primary bb" id="withdraw">Withdrawal</button></div>
+            <div class="col-md"><button type="button" class="btn btn-primary bb" id="withdraw">Withdrawal</button></div>-->
         </div>
         <br><br> <br>
-
         <div class="row">
             <!-- Create User -->
             <div class="create">
-                <div class="form-group">
-                    <form action="createUser.html" id="createUserForm" method="POST">
-                        <div class="form-group">
-                            <label class="tags">Account ID:</label>
-                            <input type="number" class="form-control inputs tags" id="AccountId">
+                <div class="form-group" ng-controller="create">
+                    <!-- <form id="withdrawalForm"> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="tags">Enter User ID:</label><input type="text" class="form-control inputs tags" id="userID" ng-model="data.userID">
+                            <br />
+                            <label class="tags">Deposit Amount:</label><input type="text" class="form-control inputs tags" id="deposit" ng-model="data.amount">
+                            <br/>
+                            <input type="submit" value="Create" class="btn btn-primary bb" ng-click="submit()">
+                            <!-- </form>-->
+                            <br/><p></p>
                         </div>
-                        <div class="form-group parent">
-                            <label class="tags">Select Account type:</label>
-                            <select name="AccountType" class="form-control tags inputs" id="AccType">
-                                <option class="select"></option>
-                                <option name="Savings">Savings</option>
-                                <option name="Cheque" id="select_two">Cheque</option>
-                            </select>
+                        <div class="col-md-6">
+                            <div class="textout tags">
+                                {{data.returnCreate}}
+                            </div>
+                            <!-- <textarea type="text" class="form-control inputs tags">{{data.returnwithdrawal}}</textarea> -->
                         </div>
-                        <button type="submit" class="btn btn-primary bb">Submit</button>
-                    </form>
+                    </div>
                 </div>
             </div>
+            
             <!-- Search -->
             <div class="search">
-                <div class="form-group" ng-controller="UserID">
-                    <form>
-                        <label class="tags">Search User ID:</label>
-                        <input type="text" class="form-control inputs tags" ng-model="data.userId">
-                        <br />
-                        <input type="submit" value="Submit" class="btn btn-primary bb" ng-click="submit()">
-                    </form>
-                    <br />
-                    <div id="return">
-                        <textarea type="text" class="form-control inputs tags" value="">{{data.returnAccLinked}}</textarea>
-                        
+                    <div class="form-group" ng-controller="UserID">
+                        <div class="row">
+                            <div class="col-md-6">
+                               <label class="tags">Search User ID:</label>
+                                <input type="text" class="form-control inputs tags" ng-model="data.userId">
+                                <br />
+                                <input type="submit" value="Search" class="btn btn-primary bb" ng-click="submit()"> 
+                            </div>
+                            <div class="col-md-6">
+                                <div class="textout tags">
+                                        <text ng-repeat="x in results">&nbsp Account ID: {{x.accountID}} <br/> &nbsp Account Type: {{x.accountType}} <br/><br/></text>
+                                </div> 
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group" ng-controller="AccountID">
-                    <form>
-                        <label class="tags">Search Account ID:</label><input type="text" class="form-control inputs tags" id="search" ng-model="data.AccountId">
-                        <br />
-                        <input type="submit" value="Submit" class="btn btn-primary bb" ng-click="submit()">
-                    </form>
-                    <br />
-                    <div id="return">
-                        <textarea type="text" class="form-control inputs tags">{{data.returnAccountType}}</textarea>
+                    <div class="form-group" ng-controller="AccountID">
+                        <div class="row">
+                        <div class="col-md-6">
+                            <label class="tags">Account ID:</label><input type="text" class="form-control inputs tags" id="search" ng-model="data.AccountId">
+                            <br />
+                            <input type="submit" value="Search" class="btn btn-primary bb" ng-click="submit()">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="textout tags">
+                                <text class="tags"> {{data.returnAccountBalance}}</text>
+                                <!-- <text ng-repeat="i in statementResults"> {{i.returnStatement}} </text> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
+            <!-- Statement -->
+            <div class="statement">
+                <div class="form-group" ng-controller="statement">
+                        <div class="row">
+                            <div class="col-md-6">
+                               <label class="tags">Search Account ID:</label>
+                                <input type="text" class="form-control inputs tags" ng-model="data.AccountId">
+                                <br />
+                                <input type="submit" value="Statement" class="btn btn-primary bb" ng-click="submit()"> 
+                            </div>
+                            <div class="col-md-6">
+                                <div class="textouting tags">
+                                       <text ng-repeat="x in data.statement">&nbsp {{x.transactionType}} &nbsp R{{x.amount}} &nbsp {{x.date}} &nbsp {{x.time}} <br/> </text>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+            </div>
             <!-- Withdraw -->
             <div class="Withdrawal">
-                <div class="form-group">
+                <div class="form-group" ng-controller="withdraw">
                     <!-- <form id="withdrawalForm"> -->
-                    <label class="tags">Enter User ID:</label><input type="text" class="form-control inputs tags" id="userID">
-                    <br />
-                    <label class="tags">Enter withdrawal Amount:</label><input type="text" class="form-control inputs tags" id="withdrawal">
-                    <br />
-                    <button type="submit" class="btn btn-primary bb" id="submitWithdrawal">Submit</button>
-                    <!-- </form>-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="tags">Enter User ID:</label><input type="text" class="form-control inputs tags" id="userID" ng-model="data.userID">
+                            <br />
+                            <label class="tags">Withdraw Amount:</label><input type="text" class="form-control inputs tags" id="withdrawal" ng-model="data.amount">
+                            <br />
+                            <input type="submit" value="Withdraw" class="btn btn-primary bb" ng-click="submit()">
+                            <!-- </form>-->
+                            <br/><p></p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="textout tags">
+                                {{data.returnwithdrawal}}
+                            </div>
+                            <!-- <textarea type="text" class="form-control inputs tags">{{data.returnwithdrawal}}</textarea> -->
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Deposit -->
             <div class="Deposit">
-                <div class="form-group">
-                    <form action="deposit.html" id="depositForm" method="POST">
-                        <label class="tags">Enter User ID:</label><input type="text" class="form-control inputs tags" id="userID">
-                        <br />
-                        <label class="tags">Enter deposit Amount:</label><input type="text" class="form-control inputs tags" id="deposit">
-                        <br />
-                        <button type="submit" class="btn btn-primary bb">Submit</button>
-                    </form>
+                <div class="form-group" ng-controller="deposit">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="tags">Enter Account ID:</label><input type="text" class="form-control inputs tags" id="userID" ng-model="data.userID">
+                            <br />
+                            <label class="tags">Deposit Amount:</label><input type="text" class="form-control inputs tags" id="deposit" ng-model="data.amount">
+                            <br />
+                            <input type="submit" value="Deposit" class="btn btn-primary bb" ng-click="submit()">
+                            <br/>
+                            <p></p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="textout tags">
+                                 {{data.returndeposit}}
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+
+            <div class="delete">
+                <div class="form-group" ng-controller="deactivate">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="tags">Enter User ID to Deactivate:</label><input type="text" class="form-control inputs tags" id="userID" ng-model="data.userID">
+                            <br />
+                            <input type="submit" value="Deactivate" class="btn btn-primary bb" ng-click="submit()">
+                            <br/>
+                            <p></p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="textout tags">
+                               {{data.returndelete}}
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+
+                <div class="form-group" ng-controller="activate">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="tags">Enter User ID to activate:</label><input type="text" class="form-control inputs tags" id="userID" ng-model="data.userID">
+                            <br />
+                            <input type="submit" value="Activate" class="btn btn-primary bb" ng-click="submit()">
+                            <br/>
+                            <p></p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="textout tags">
+                                {{data.returnActivate}}
+                            </div>
+                        </div>  
+                    </div>
                 </div>
             </div>
         </div>
@@ -328,7 +367,6 @@
     <br />
 
     <script type="text/javascript">
-
         var app = angular.module('myApp', []);
 
         app.controller('UserID', function ($scope, $http) {
@@ -336,12 +374,51 @@
             $scope.submit = function () {
                 console.log('clicked submit');
                 $http({
-                    url: 'http://localhost:8080/searchUserID',
+                    url: 'https://clientaccounts.herokuapp.com/searchUserID',
                     method: 'POST',
                     data: $scope.data
                 }).then(function (httpResponse) {
                     console.log('response:', httpResponse.data);
-                    $scope.data.returnAccLinked = httpResponse.data.account;
+                    $scope.results=[];
+                    for(var i=0; i<httpResponse.data.length; i++){
+                        $scope.results.push(httpResponse.data[i]);
+                    }
+                      $scope.data.returnAccLinked = $scope.results;
+                    //$scope.data.returnAccLinked = httpResponse.data.account;
+                })
+            }
+        });
+
+        app.controller('statement', function ($scope, $http) {
+            $scope.data = {};
+            $scope.submit = function () {
+                console.log('clicked submit');
+                $http({
+                    url: 'https://clientaccounts.herokuapp.com/statement',
+                    method: 'POST',
+                    data: $scope.data
+                }).then(function (httpResponse) {
+                    console.log('response:', httpResponse.data);
+                    $scope.results=[];
+                    for(var i=0; i<httpResponse.data.length; i++){
+                        $scope.results.push(httpResponse.data[i]);
+                    }
+                      $scope.data.statement = $scope.results;
+                })
+            }
+        });
+
+        app.controller('create', function ($scope, $http) {
+            $scope.data = {};
+            $scope.submit = function () {
+                console.log('clicked submit');
+                $http({
+                    url: 'https://clientaccounts.herokuapp.com/create',
+                    method: 'POST',
+                    data: $scope.data
+                }).then(function (httpResponse) {
+                    console.log('response:', httpResponse.data);
+                   $scope.data.returnCreate = httpResponse.data.create;
                 })
             }
         });
@@ -351,27 +428,90 @@
             $scope.submit = function () {
                 console.log('clicked submit');
                 $http({
-                    url: 'http://localhost:8080/searchaccountID',
+                    url: 'https://clientaccounts.herokuapp.com/accountID',
                     method: 'POST',
                     data: $scope.data
                 }).then(function (httpResponse) {
                     console.log('response:', httpResponse.data);
-                    $scope.data.returnAccountType = httpResponse.data.accounttype;
+                    $scope.data.returnAccountBalance = httpResponse.data.amt;
                 })
             }
         });
 
+        app.controller('withdraw', function ($scope, $http) {
+            $scope.data = {};
+            $scope.submit = function () {
+                console.log('clicked submit');
+                $http({
+                    url: 'https://clientaccounts.herokuapp.com/withdraw',
+                    method: 'POST',
+                    data: $scope.data
+                }).then(function (httpResponse) {
+                    console.log('response:', httpResponse.data);
+                   $scope.data.returnwithdrawal = httpResponse.data.amt;
+                })
+            }
+        });
+
+        app.controller('deposit', function ($scope, $http) {
+            $scope.data = {};
+            $scope.submit = function () {
+                console.log('clicked submit');
+                $http({
+                    url: 'https://clientaccounts.herokuapp.com/deposit',
+                    method: 'POST',
+                    data: $scope.data
+                }).then(function (httpResponse) {
+                    console.log('response:', httpResponse.data);
+                   $scope.data.returndeposit = httpResponse.data.amt;
+                })
+            }
+        });
+
+        app.controller('deactivate', function ($scope, $http) {
+            $scope.data = {};
+            $scope.submit = function () {
+                console.log('clicked submit');
+                $http({
+                    url: 'https://clientaccounts.herokuapp.com/deactivate',
+                    method: 'POST',
+                    data: $scope.data
+                }).then(function (httpResponse) {
+                    console.log('response:', httpResponse.data);
+                   $scope.data.returndelete = httpResponse.data.msg;
+                })
+            }
+        });
+
+        app.controller('activate', function ($scope, $http) {
+            $scope.data = {};
+            $scope.submit = function () {
+                console.log('clicked submit');
+                $http({
+                    url: 'https://clientaccounts.herokuapp.com/activate',
+                    method: 'POST',
+                    data: $scope.data
+                }).then(function (httpResponse) {
+                    console.log('response:', httpResponse.data);
+                   $scope.data.returnActivate = httpResponse.data.msg;
+                })
+            }
+        });
 
         $(document).ready(function () {
             $(".search").hide();
             $('.Deposit').hide();
             $('.Withdrawal').hide();
+            $('.delete').hide();
+            $('.statement').hide();
 
             $('#create').on('click', function () {
                 $('.create').fadeIn(550);
                 $('.Deposit').hide();
                 $('.Withdrawal').hide();
                 $('.search').hide();
+                $('.delete').hide();
+                $('.statement').hide();
             });
 
             $('#search').on('click', function () {
@@ -379,6 +519,17 @@
                 $('.Deposit').hide();
                 $('.Withdrawal').hide();
                 $('.create').hide();
+                $('.delete').hide();
+                $('.statement').hide();
+            });
+
+            $('#statement').on('click', function () {
+                $('.statement').fadeIn(550);
+                $('.Deposit').hide();
+                $('.Withdrawal').hide();
+                $('.create').hide();
+                $('.delete').hide();
+                $('.search').hide();
             });
 
             $('#dep').on('click', function () {
@@ -386,6 +537,8 @@
                 $('.search').hide();
                 $('.Withdrawal').hide();
                 $('.create').hide();
+                $('.delete').hide();
+                $('.statement').hide();
             });
 
             $('#withdraw').on('click', function () {
@@ -393,17 +546,19 @@
                 $('.search').hide();
                 $('.Deposit').hide();
                 $('.create').hide();
+                $('.delete').hide();
+                $('.statement').hide();
             });
 
-            $('#submitWithdrawal').on('click', function () {
-                var id = $('#userID').val();
-                var amount = $('#withdrawal').val();
-                alert('i: ' + id);
-                alert('amount: ' + amount);
-                alert(model.logWithdrawalTransaction(id, amount))
+            $('#delete').on('click', function () {
+                $('.delete').fadeIn(550);
+                $('.search').hide();
+                $('.Withdrawal').hide();
+                $('.Deposit').hide();
+                $('.create').hide();
+                $('.statement').hide();
             });
         });
     </script>
-
 </body>
 </html>
