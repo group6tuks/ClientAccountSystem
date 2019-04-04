@@ -1,6 +1,5 @@
 const sqlite3 = require('sqlite3');
 const app = require('express');
-const reporting = require('./Reporting');
 
 class SQLQueries{
     createAccount(user, callback){
@@ -11,17 +10,9 @@ class SQLQueries{
                 return callback(err.message);
             }
             else{
-            
                 var accountTypes = ["Debit", "Cheque", "Savings"];
                 var accType =  accountTypes[Math.floor(Math.random()*accountTypes.length)];
-                
-                //-----Reporting------
-        
-                var rep = new reporting;
-                rep.log('1', user, -1, "-1", 0.0);
 
-                //-------------------
-                
                let sql = `INSERT INTO  Account (userID, accountType) VALUES(?,?)`;
                 db.run(sql, [user, accType], (err) => {
                 if (err) {
@@ -33,7 +24,8 @@ class SQLQueries{
             
         });
 
-         db.close();   
+         db.close();
+       
     }
 
     createAccount(user, amount, callback){
@@ -58,14 +50,7 @@ class SQLQueries{
                         callback(err);
                     }
                 });
-                
-                //------Reporting-----
-                    
-                var rep = new reporting;
-                rep.log('7', user, -1, accType, -1);
 
-                //-------------------
-                    
                 sql = `INSERT INTO Log(transactionType,amount, accountID) Values(?,?,?)`;
                 db.run(sql, ['deposit',amount,accID], (err) => {
                     if (err) {
@@ -82,7 +67,6 @@ class SQLQueries{
          db.close();
        
     });
-        
 }
 
     getAccounts(user, callback){
@@ -101,13 +85,10 @@ class SQLQueries{
             if (err) {
                 throw err;
             }
-            var rep = new reporting;
-            rep.log('2', user, -1, "-1", -1);
             return callback(row);
             
         });
         db.close();
-        
     }
 
 
@@ -130,7 +111,6 @@ class SQLQueries{
         });
         
         db.close();
-       
     }
 
     getEntries(callback){
@@ -199,15 +179,12 @@ class SQLQueries{
                     if (err) {
                         throw err;
                     }
-                     var rep = new reporting;
-                    rep.log('4', -1, accID, "-1", -1);
                     stringOut += `${row.transactionType} + '  R' +${row.amount}, ' date: '+ ${row.date} ${row.time}\n `;
                     return callback(row);
                 });
         });
         
         db.close();
-        
         return stringOut;
     }
 
@@ -218,12 +195,6 @@ class SQLQueries{
             let sql = `UPDATE Account SET currentBalance = ? WHERE accountID= ?`;
 
             if(parseInt(amount) > parseInt(amt)){
-                //-----Reporting-----
-        
-                var rep = new reporting;
-                rep.log('5', -1, accID, "-1", -1);
-                
-                //-------------------
                 return callback('Insuffient funds');
             }
 
@@ -242,8 +213,7 @@ class SQLQueries{
                                 if (err) {
                                     callback(err);
                                 }
-                            var rep = new reporting;
-                            rep.log('5', -1, accID, "-1", amount);
+                           
                             return callback('Success, new balance: '+  tbalance);
                         });
                     });
@@ -252,7 +222,6 @@ class SQLQueries{
 
             db.close();
         });
-        
 }
 
     deposit(accID,amount,callback){
@@ -277,12 +246,7 @@ class SQLQueries{
                                 if (err) {
                                     callback(err);
                                 }
-                            //-----Reporting-----
-
-                            var rep = new reporting;
-                            rep.log('6', -1, accID, "-1", amount);
-
-                            //-------------------
+                           
                             return callback('Success, new balance: '+  tbalance);
                         });
                     });
@@ -292,7 +256,6 @@ class SQLQueries{
             });
 
         });
-        
     }
 
     selectBalance(account,callback) {
@@ -309,18 +272,13 @@ class SQLQueries{
                     if (err) {
                         throw err;
                     }
-                    //-----Reporting-----
-            
-                        var rep = new reporting;
-                        rep.log('3', -1, account, "-1", -1);
                     
-                    //-------------------
                     return callback(parseInt(row.currentBalance));
                 });
             }
         });
         
-        db.close();   
+        db.close();
     }
 
     deactivateUser(user, callback) {
@@ -339,12 +297,6 @@ class SQLQueries{
                     if (err) {
                         throw err;
                     }
-                    //-----Reporting------
-        
-                    var rep = new reporting;
-                    rep.log('8', user, -1, "-1", -1);
-                    
-                    //-------------------
                      return callback('deactivated successfully');
                 });
             }
@@ -368,12 +320,6 @@ class SQLQueries{
                     if (err) {
                         throw err;
                     }
-                    //-----Reporting------
-        
-                        var rep = new reporting;
-                        rep.log('9', user, -1, "-1", -1);
-                        
-                    //--------------------
                     return callback('re-activated successfully');
                     
                 });
