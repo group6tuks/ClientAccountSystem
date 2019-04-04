@@ -336,7 +336,7 @@
             $scope.submit = function () {
                 console.log('clicked submit');
                 $http({
-                    url: 'http://localhost:8080/searchUserID',
+                    url: 'http://localhost:8080/searchUserID/',
                     method: 'POST',
                     data: $scope.data
                 }).then(function (httpResponse) {
@@ -351,7 +351,7 @@
             $scope.submit = function () {
                 console.log('clicked submit');
                 $http({
-                    url: 'http://localhost:8080/searchaccountID',
+                    url: 'http://localhost:8080/searchaccountID', //get method "name"
                     method: 'POST',
                     data: $scope.data
                 }).then(function (httpResponse) {
