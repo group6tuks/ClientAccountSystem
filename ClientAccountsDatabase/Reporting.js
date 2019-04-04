@@ -1,5 +1,3 @@
-//Documentation (ReportEvents.txt) for Reporting.js is in the Documentation folder of the GIT repository.
-
 class Reporting{
 		
 	log(code,id)
@@ -70,12 +68,9 @@ class Reporting{
 	
 	postToRepSubSystem(numLines)
 	{
-		//remember to delete text file here
 		console.log("Posting Log Report to REP Sub System");
 		var lines;
 		var obj = [];
-		//var dataL;
-                //var fs = require("fs");
 		
 		var fs = require("fs");
 		var dat = fs.readFileSync('Report.txt');
@@ -131,15 +126,12 @@ class Reporting{
 		var dat = fs.readFileSync('Report.txt');
                 
                 numLines = dat.toString().split('\n').length-1;
-		
-                //console.log(numLines);
                 
 		if(numLines >= 5)
 		{
 			this.postToRepSubSystem(numLines);
 		}
 	}
-	
 }
 
 module.exports = Reporting;
