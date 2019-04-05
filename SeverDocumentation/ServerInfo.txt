@@ -2,16 +2,23 @@
 SERVER INFOMAION:
 ---------------------
 
-AZURE Server
+HEROKU Server
 
-App URL: https://clientaccountsserver.azurewebsites.net
+App URL: https://clientaccounts.herokuapp.com
  
-Publish Method : FTP 
-publishUrl="ftp://waws-prod-dm1-137.ftp.azurewebsites.windows.net/site/wwwroot"  
-userName="ClientAccountsServer\$ClientAccountsServer" 
-userPWD="chhuFKtYxrwgQlEoAN7ybhCWSL1odckkgCfolaeWj0S8bGKPhlkoNta1zCHa" 
+Publish Method : GitHub 
+GitHub Url = "https://github.com/u14402425/clientaccounts"  
+
 
 ---------------------
 DEPLOY INSTRUCTIONS:
 ---------------------
+
+Pipleline made with GitHub Repository mentioned above.
+
+- PULL files
+- Make changes
+- COMMIT files
+
+(Files will then be approved, Pulled to master and then the master branch will be Deployed to the Heroku server) - This will be done by Bandile Dlamini
 
