@@ -4,36 +4,16 @@ const reporting = require('./Reporting');
 
 class SQLQueries{
     createAccount(user, callback){
-         const sqlite3 = require('sqlite3').verbose();
-        let stringOut="";
-        let db = new sqlite3.Database('./ClientAccountsDatabase.sqlite3', sqlite3.OPEN_READWRITE, (err) => {
-            if (err) {
-                return callback(err.message);
-            }
-            else{
-            
-                var accountTypes = ["Debit", "Cheque", "Savings"];
-                var accType =  accountTypes[Math.floor(Math.random()*accountTypes.length)];
-                
+
+        this.createAccountDeposit(user,0,callback);
+        
                 //-----Reporting------
         
                 var rep = new reporting;
                 rep.log('1', user, -1, "-1", 0.0);
 
                 //-------------------
-                
-               let sql = `INSERT INTO  Account (userID, accountType) VALUES(?,?)`;
-                db.run(sql, [user, accType], (err) => {
-                if (err) {
-                    callback(err);
-                }
-                    return callback("Entry created");
-                }); 
-            }
-            
-        });
-
-         db.close();   
+               
     }
 
     createAccount(user, amount, callback){
@@ -74,7 +54,7 @@ class SQLQueries{
                     
                 }); 
 
-                return callback("Entry created");
+                return callback("");
             });
             
         }
@@ -224,7 +204,7 @@ class SQLQueries{
                 rep.log('5', -1, accID, "-1", -1);
                 
                 //-------------------
-                return callback('Insuffient funds');
+                return callback('{“Status” : “Insufficient Funds”, “balance”: "'+ amt+'”}');
             }
 
             let tbalance= parseInt(amt) - parseInt(amount);
@@ -244,7 +224,7 @@ class SQLQueries{
                                 }
                             var rep = new reporting;
                             rep.log('5', -1, accID, "-1", amount);
-                            return callback('Success, new balance: '+  tbalance);
+                            return callback('{“Status” : “Success”, “balance”: "'+ tbalance+'”}');
                         });
                     });
                 }
@@ -283,7 +263,7 @@ class SQLQueries{
                             rep.log('6', -1, accID, "-1", amount);
 
                             //-------------------
-                            return callback('Success, new balance: '+  tbalance);
+                            return callback('{“Status” : “Success”, “balance”: "'+ tbalance+'”}');
                         });
                     });
                 };
