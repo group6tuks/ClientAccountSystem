@@ -15,22 +15,3 @@ userPWD="chhuFKtYxrwgQlEoAN7ybhCWSL1odckkgCfolaeWj0S8bGKPhlkoNta1zCHa"
 DEPLOY INSTRUCTIONS:
 ---------------------
 
-STEP 1:
-Download FileZilla (https://filezilla-project.org/download.php?platform=win64) or and other FTP Client
-
-STEP 2:
-Use the infomation above to connect to the server
-HOST = <publishUrl>
-USERNAME = <userName>
-PASSWORD = <userPWD>
-
-STEP 3:
-Navigate to the direcory
-/site/wwwroot          <===== Node.js project
-/site/wwwroot/public   <===== HTML files
-
-STEP 4:
-Upload files to correct directories
-
-STEP 5:
-View changes on the App URL : https://clientaccountsserver.azurewebsites.net
