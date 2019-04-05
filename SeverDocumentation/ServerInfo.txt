@@ -2,35 +2,23 @@
 SERVER INFOMAION:
 ---------------------
 
-AZURE Server
+HEROKU Server
 
-App URL: https://clientaccountsserver.azurewebsites.net
+App URL: https://clientaccounts.herokuapp.com
  
-Publish Method : FTP 
-publishUrl="ftp://waws-prod-dm1-137.ftp.azurewebsites.windows.net/site/wwwroot"  
-userName="ClientAccountsServer\$ClientAccountsServer" 
-userPWD="chhuFKtYxrwgQlEoAN7ybhCWSL1odckkgCfolaeWj0S8bGKPhlkoNta1zCHa" 
+Publish Method : GitHub 
+GitHub Url = "https://github.com/u14402425/clientaccounts"  
+
 
 ---------------------
 DEPLOY INSTRUCTIONS:
 ---------------------
 
-STEP 1:
-Download FileZilla (https://filezilla-project.org/download.php?platform=win64) or and other FTP Client
+Pipleline made with GitHub Repository mentioned above.
 
-STEP 2:
-Use the infomation above to connect to the server
-HOST = <publishUrl>
-USERNAME = <userName>
-PASSWORD = <userPWD>
+- PULL files
+- Make changes
+- COMMIT files
 
-STEP 3:
-Navigate to the direcory
-/site/wwwroot          <===== Node.js project
-/site/wwwroot/public   <===== HTML files
+(Files will then be approved, Pulled to master and then the master branch will be Deployed to the Heroku server) - This will be done by Bandile Dlamini
 
-STEP 4:
-Upload files to correct directories
-
-STEP 5:
-View changes on the App URL : https://clientaccountsserver.azurewebsites.net
